@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aadi Labs, Inc</title>
+    <meta name="description" content="Landing page for Aadi Labs, Inc." />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="container" role="main">
+      <section class="content" aria-labelledby="intro-heading">
+        <p id="tagline">Hi! We're Aadi Labs, Inc.</h1>
+        <p class="tagline">Product driven ai research lab building next generation of personal agents</p>
+
+        <p class="contact">
+          Feel free to reach out at
+          <a class="link" href="mailto:hi@aadilabs.com">hi@aadilabs.com</a>
+          or follow along at
+          <a class="link" href="https://x.com/aadilabsinc" target="_blank" rel="noopener">x.com/aadilabsinc</a>
+          ✨
+        </p>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const storageKey = 'aadi-theme-preference';
+        const root = document.documentElement;
+        const toggleBtn = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function resolveAutoTheme() {
+          return prefersDark.matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(value) {
+          const theme = value === 'light' || value === 'dark' ? value : resolveAutoTheme();
+          root.setAttribute('data-theme', theme);
+          if (toggleBtn) toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        const saved = localStorage.getItem(storageKey);
+        applyTheme(saved || 'auto');
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+            const current = root.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(storageKey, next);
+            applyTheme(next);
+          });
+        }
+
+        prefersDark.addEventListener('change', function () {
+          const savedPref = localStorage.getItem(storageKey);
+          if (!savedPref) applyTheme('auto');
+        });;
+      })();
+    </script>
+  </body>
+  </html>
+
+
